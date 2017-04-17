@@ -13,7 +13,10 @@ module GraphQL
           @klass = klass
           @name = field.property || field.name
           @validators = klass.validators.map { |validator|
-            return nil if validator.attributes.exclude? @id
+            return nil if validator.attributes.exclude? @name
+            return nil if validator.options[:if].present?
+            return nil if validator.options[:unless].present?
+
             ValidatorReflection.new(validator)
           }.compact
           @errors = []

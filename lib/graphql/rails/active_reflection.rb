@@ -1,16 +1,16 @@
+require 'graphql'
+require 'graphql/rails/active_reflection/model_reflection'
+require 'graphql/rails/active_reflection/attribute_reflection'
+require 'graphql/rails/active_reflection/validation_result'
+require 'graphql/rails/active_reflection/validator_reflection'
+require 'graphql/rails/active_reflection/types'
+
 module GraphQL
   module Rails
     module ActiveReflection
       VERSION = '0.1.0'
 
       class UnsupportedObject < StandardError; end
-
-      TYPES = [
-        ModelReflectionType,
-        AttributeReflectionType,
-        ValidatorType,
-        ValidationResultType
-      ]
 
       class Model
         def self.interface
@@ -40,12 +40,3 @@ module GraphQL
     end
   end
 end
-
-require 'graphql/rails/active_reflection/model_reflection'
-require 'graphql/rails/active_reflection/attribute_reflection'
-require 'graphql/rails/active_reflection/validation_result'
-require 'graphql/rails/active_reflection/validator_reflection'
-require 'graphql/rails/active_reflection/types/model_reflection_type'
-require 'graphql/rails/active_reflection/types/attribute_reflection_type'
-require 'graphql/rails/active_reflection/types/validation_result_type'
-require 'graphql/rails/active_reflection/types/validator_type'

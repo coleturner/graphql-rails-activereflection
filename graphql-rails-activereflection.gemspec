@@ -5,6 +5,7 @@ Gem::Specification.new do |s|
   s.name        = 'graphql-rails-activereflection'
   s.version     = GraphQL::Rails::ActiveReflection::VERSION
   s.date        = Date.today.to_s
+  s.summary = "Reflection over GraphQL for ActiveRecord models and validators"
   s.description = "Reflection over GraphQL for ActiveRecord models and validators"
   s.authors     = ["Cole Turner"]
   s.email       = 'turner.cole@gmail.com'

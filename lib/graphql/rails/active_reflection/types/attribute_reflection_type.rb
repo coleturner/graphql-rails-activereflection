@@ -1,26 +1,36 @@
-AttributeReflectionType = ::GraphQL::ObjectType.define do
-    name Recline::GraphQL::AttributeReflection.schema_name
+module GraphQL
+  module Rails
+    module ActiveReflection
+      module Types
 
-    field :name, !types.String
-    field :validators, ValidatorType.to_list_type
-    field :validate, ValidationResultType do
-      argument :int, types.Int
-      argument :str, types.String
-      argument :float, types.Float
-      argument :bool, types.Boolean
+        AttributeReflectionType = ::GraphQL::ObjectType.define do
+          name AttributeReflection.schema_name
 
-      resolve ->(obj, args, _ctx) do
-        values = [args['int'], args['str'], args['float'], args['bool']]
-        raise ArgumentError, "Must specify at least one argument" if values.compact.empty?
-        raise ArgumentError, "Too many arguments, one expected" if values.compact.size > 1
+          field :name, !types.String
+          field :validators, ValidatorType.to_list_type
+          field :validate, ValidationResultType do
+            argument :int, types.Int
+            argument :str, types.String
+            argument :float, types.Float
+            argument :bool, types.Boolean
 
-        value = values.compact.first
+            resolve ->(obj, args, _ctx) do
+              values = [args['int'], args['str'], args['float'], args['bool']]
+              raise ArgumentError, "Must specify at least one argument" if values.compact.empty?
+              raise ArgumentError, "Too many arguments, one expected" if values.compact.size > 1
 
-        model = obj.klass.new
-        model[obj.name] = value
+              value = values.compact.first
 
-        model.validate!
-        ValidationResult.new(model.valid?, model.errors[obj.name])
+              model = obj.klass.new
+              model[obj.name] = value
+
+              model.validate!
+              ValidationResult.new(model.valid?, model.errors[obj.name])
+            end
+          end
+        end
+
       end
     end
   end
+end
