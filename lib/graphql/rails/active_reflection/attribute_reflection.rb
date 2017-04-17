@@ -5,17 +5,13 @@ module GraphQL
         @schema_name = "ActiveReflectionAttribute"
 
         attr_reader :klass
-        attr_reader :id
-        attr_reader :title
+        attr_reader :name
         attr_reader :description
         attr_reader :validators
 
         def initialize(field, klass, schema)
           @klass = klass
-          @id = field.name
-          @title = field.name.capitalize
-          @description = field.description
-          @property = field.property || field.name
+          @name = field.property || field.name
           @validators = klass.validators.map { |validator|
             return nil if validator.attributes.exclude? @id
             ValidatorReflection.new(validator)

@@ -1,10 +1,7 @@
 AttributeReflectionType = ::GraphQL::ObjectType.define do
     name Recline::GraphQL::AttributeReflection.schema_name
 
-    field :id, !types.String
-    field :title, !types.String
-    field :description, types.String
-    field :appearance, types.String
+    field :name, !types.String
     field :validators, ValidatorType.to_list_type
     field :validate, ValidationResultType do
       argument :int, types.Int
@@ -20,10 +17,10 @@ AttributeReflectionType = ::GraphQL::ObjectType.define do
         value = values.compact.first
 
         model = obj.klass.new
-        model[obj.property] = value
+        model[obj.name] = value
 
         model.validate!
-        ValidationResult.new(model.valid?, model.errors[@property])
+        ValidationResult.new(model.valid?, model.errors[obj.name])
       end
     end
   end

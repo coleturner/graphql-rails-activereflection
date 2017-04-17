@@ -1,4 +1,5 @@
-# GraphQL::Rails::ActiveReflection (graphql-rails-activereflection)
+# GraphQL::Rails::ActiveReflection
+## (graphql-rails-activereflection)
 Reflection over GraphQL for ActiveRecord models and validators
 
 # What is it?
