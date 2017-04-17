@@ -57,6 +57,8 @@ Each of the validators corresponds to the standard Rails validators. Almost all 
 
 There is also the `validate(...)` field with arguments for standard scalar types. Any one of the arguments can be provided, but only one. The result will contain a `valid` boolean and a list of `errors` strings returned from the validators.
 
+In the future all of the `validate(...)` should be chained for a single call.
+
 ## Direction
 Future plans for this module are to expose any reflections for an ActiveRecord model.
 
@@ -66,6 +68,7 @@ If you wish to contribute to this project, any pull request is warmly welcomed.
 - [ ] Documentation
 - [ ] Examples
 - [ ] Unit Tests
+- [ ] Merge `validate(...)`` calls
 
 # Credits
 - Cole Turner ([@colepatrickturner](https://github.com/colepatrickturner))
