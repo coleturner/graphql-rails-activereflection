@@ -1,5 +1,5 @@
 $LOAD_PATH.push File.expand_path("../lib", __FILE__)
-require 'graphql/rails/active_reflection'
+require 'graphql/rails/active_reflection/version'
 
 Gem::Specification.new do |s|
   s.name        = 'graphql-rails-activereflection'
