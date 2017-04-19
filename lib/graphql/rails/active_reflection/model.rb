@@ -3,7 +3,10 @@ module GraphQL::Rails::ActiveReflection
     def self.interface
       @interface ||= GraphQL::InterfaceType.define do
         name "ActiveReflectionInterface"
-        field('_model', GraphQL::Rails::ActiveReflection::Types::ModelReflectionType, 'Model of attributes for field.')
+        field('_model', GraphQL::Rails::ActiveReflection::Types::ModelReflectionType, 'Model of attributes for field.') do
+          description('Fetch the content model for the given object.')
+          resolve(GraphQL::Rails::ActiveReflection::ModelReflection)
+        end
       end
     end
 
@@ -14,7 +17,7 @@ module GraphQL::Rails::ActiveReflection
       field = GraphQL::Field.define do
         type(GraphQL::Rails::ActiveReflection::Model.interface)
         description('Fetch the content model for the given object.')
-        resolve(GraphQL::Rails::ActiveReflection::Types::ModelReflection)
+        resolve(GraphQL::Rails::ActiveReflection::ModelReflection)
       end
 
       if kwargs.any? || block

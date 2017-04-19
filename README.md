@@ -30,11 +30,12 @@ And that's it! This will add a `_model` field to the object type and enables the
 fragment on YourObjectType {
   _model {
     attributes {
-      name
+      name: String
+      field_name: String
 
       validators {
-        abscence: Boolean
-        prescence: Boolean
+        absence: Boolean
+        presence: Boolean
         uniqueness: Boolean
         with_format: String
         without_format: String
@@ -52,6 +53,9 @@ fragment on YourObjectType {
   }
 }
 ```
+
+The `_model` field will resolve to whatever type `Schema.resolve_type` returns for that object.
+Only the fields on that type will be exposed as `attributes` - where `name` is the attribute name and `field_name` is the field name that exposed the attribute.
 
 Each of the validators corresponds to the standard Rails validators. Almost all validators for an attribute will be returned, **except those that have the `if` or `unless` conditionals.** This is by design and therefore make note that any conditional validations will have to be performed manually.
 

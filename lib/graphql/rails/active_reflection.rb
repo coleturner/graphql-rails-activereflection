@@ -1,7 +1,6 @@
 module GraphQL::Rails
   module ActiveReflection
     module Types; end
-    class UnsupportedObject < StandardError; end
   end
 end
 

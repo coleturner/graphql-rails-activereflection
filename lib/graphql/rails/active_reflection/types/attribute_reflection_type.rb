@@ -2,6 +2,7 @@ GraphQL::Rails::ActiveReflection::Types::AttributeReflectionType = GraphQL::Obje
   name GraphQL::Rails::ActiveReflection::AttributeReflection.schema_name
 
   field :name, !types.String
+  field :field_name, !types.String
   field :validators, GraphQL::Rails::ActiveReflection::Types::ValidatorType.to_list_type
   field :validate, GraphQL::Rails::ActiveReflection::Types::ValidationResultType do
     argument :int, types.Int

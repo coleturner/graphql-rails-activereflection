@@ -4,18 +4,19 @@ module GraphQL::Rails::ActiveReflection
 
     attr_reader :klass
     attr_reader :name
+    attr_reader :field_name
     attr_reader :description
     attr_reader :validators
 
     def initialize(field, klass, schema)
       @klass = klass
+      @field_name = field.name
       @name = field.property || field.name
       @validators = klass.validators.map { |validator|
-        return nil if validator.attributes.exclude? @name
-        return nil if validator.options[:if].present?
-        return nil if validator.options[:unless].present?
-
-        ValidatorReflection.new(validator)
+        # Skip if the validator does not apply to this field
+        # Skip if there are :if or :unless options (conditionals purposely unsupported)
+        next if validator.attributes.exclude?(@name.to_sym) || validator.options[:if].present? || validator.options[:unless].present?
+        GraphQL::Rails::ActiveReflection::ValidatorReflection.new(validator)
       }.compact
       @errors = []
     end
