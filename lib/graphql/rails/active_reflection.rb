@@ -8,7 +8,7 @@ require 'graphql/rails/active_reflection/types'
 module GraphQL
   module Rails
     module ActiveReflection
-      VERSION = '0.1.0'
+      VERSION = '0.1.1'
 
       class UnsupportedObject < StandardError; end
 
