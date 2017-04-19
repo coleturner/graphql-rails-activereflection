@@ -68,7 +68,7 @@ If you wish to contribute to this project, any pull request is warmly welcomed.
 - [ ] Documentation
 - [ ] Examples
 - [ ] Unit Tests
-- [ ] Merge `validate(...)`` calls
+- [ ] Merge `validate(...)` calls
 
 # Credits
 - Cole Turner ([@colepatrickturner](https://github.com/colepatrickturner))
