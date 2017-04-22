@@ -1,11 +1,11 @@
 module GraphQL::Rails::ActiveReflection
   class ModelReflection
     @schema_name = "ActiveReflectionModel"
-    @reflections = {}
+    @@reflections = {}
 
     def self.call(obj, args, ctx)
       raise TypeError, "ActiveReflection object type must be derived from ActiveRecord::Base" unless obj.is_a?(ActiveRecord::Base)
-      @reflections[obj] ||= new(obj, ctx)
+      @@reflections[obj] ||= new(obj, ctx)
     end
 
     attr_reader :attributes
@@ -14,17 +14,26 @@ module GraphQL::Rails::ActiveReflection
       @klass = obj.class
       @type = ctx.schema.resolve_type(obj, ctx)
       @schema = ctx.schema
-      @attributes = @type.fields.map { |name, field|
+      get_attributes
+    end
+
+    class << self
+      attr_accessor :schema_name
+    end
+
+    protected
+    def get_attributes
+      @attributes ||= @type.fields.map { |name, field|
         # No reflection if it's not a model attribute
         property = field.property || name
-        if @klass.attribute_names.include? property
+        if include_property? property
           GraphQL::Rails::ActiveReflection::AttributeReflection.new(field, @klass, @schema)
         end
       }.compact
     end
 
-    class << self
-      attr_accessor :schema_name
+    def include_property? name
+      @klass.attribute_names.include? name
     end
 
   end
