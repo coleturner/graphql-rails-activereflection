@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency "graphql", ['>= 1.5.0', '< 2.0']
-  s.add_development_dependency "activerecord"
-  s.add_development_dependency "activemodel"
+  s.add_runtime_dependency "activerecord"
+  s.add_runtime_dependency "activemodel"
   s.required_ruby_version = '>= 2.3.0'
 end
