@@ -28,12 +28,12 @@ And that's it! This will add a `_model` field to the object type and enables the
 
 ```graphql
 fragment on YourObjectType {
-  _model {
-    attributes {
+  _model: ActiveReflectionModel {
+    attributes: [ActiveReflectionAttribute] {
       name: String
       field_name: String
 
-      validators {
+      validators: [ActiveReflectionValidator] {
         absence: Boolean
         presence: Boolean
         uniqueness: Boolean
@@ -45,7 +45,7 @@ fragment on YourObjectType {
         exclusion: [String]
       }
 
-      validate(int: Integer, str: String, float: Float, bool: Boolean) {
+      validate(int: Integer, str: String, float: Float, bool: Boolean): ActiveReflectionValidation {
         valid: Boolean
         errors: [String]
       }
